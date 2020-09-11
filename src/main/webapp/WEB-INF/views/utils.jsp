@@ -6,7 +6,7 @@
 <style>
 	.container {
 		width: 20vw;
-	 	height: 50vh;
+	 	height: 75vh;
 	  	display: flex;
 	  	flex-direction: row;
 	  	justify-content: center;

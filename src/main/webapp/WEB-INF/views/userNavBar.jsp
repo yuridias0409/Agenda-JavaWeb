@@ -6,16 +6,22 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Calendário <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Contatos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="http://localhost:8080/springmvc/novoContato">Novo Contato</a>
-          <a class="dropdown-item" href="http://localhost:8080/springmvc/listarContatos">Listar Contatos</a>
+          <a class="dropdown-item" href=novoContato>Novo Contato</a>
+          <a class="dropdown-item" href=listarContatos>Listar Contatos</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Compromissos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href=novoCompromisso>Novo Compromisso</a>
+          <a class="dropdown-item" href=listarCompromisso>Ver Compromissos</a>
         </div>
       </li>
     </ul>

@@ -15,7 +15,7 @@
 </c:if>
 <br>
 <div class="container">
-	<form method=POST action=editaContatos?userid=${contato.id}>
+	<form method=POST action=editaContatos?cid=${contato.id}>
 	  <center><h2>Editar Contato</h2></center>
 	  <div class="form-group">
 	  	<center><label>Nome</label></center>

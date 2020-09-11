@@ -71,7 +71,7 @@ public class ContatosController {
 	}
 	
 	@RequestMapping("editaContatos")
-	public String editaContato(@RequestParam(value = "userid", required = true) int id, HttpSession sessao, Contato contato) {
+	public String editaContato(@RequestParam(value = "cid", required = true) int id, HttpSession sessao, Contato contato) {
 		if(sessao.getAttribute("userid") != null) {
 			ContatoDAO dao = new ContatoDAO();
 			dao.update(contato, id);
