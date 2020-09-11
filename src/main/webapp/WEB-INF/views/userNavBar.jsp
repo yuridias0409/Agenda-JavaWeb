@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Calendário <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,6 +19,6 @@
         </div>
       </li>
     </ul>
-    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Deslogar</button>
+    <a class="btn btn-outline-danger my-2 my-sm-0" href=logout>Deslogar</a>
   </div>
 </nav>

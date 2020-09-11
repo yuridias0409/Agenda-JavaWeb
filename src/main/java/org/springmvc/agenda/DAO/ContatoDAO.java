@@ -11,15 +11,17 @@ import org.springmvc.agenda.model.Contato;
 import org.springmvc.agenda.util.ConexaoAgendaFactory;
 
 public class ContatoDAO{
-	public void create(Contato contato) {
+	public void create(Contato contato, int userid) {
 		try(Connection conn = ConexaoAgendaFactory.getConexao()){
 			
-			String sql = "INSERT INTO contatos (name, email) VALUES (?, ?)";
+			String sql = "INSERT INTO contatos (name, email, endereco, telefone, userid) VALUES (?, ?, ?, ?, ?)";
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, contato.getNome());
+			ps.setString(1, contato.getNome().toUpperCase());
 			ps.setString(2, contato.getEmail());
-			
+			ps.setString(3, contato.getEndereco());
+			ps.setString(4, contato.getTelefone());
+			ps.setInt(5, userid);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			
@@ -27,22 +29,23 @@ public class ContatoDAO{
 		}
 	}
 	
-	public List<Contato> readAll(){
+	public List<Contato> readAll(int userid){
 		
 		try(Connection conn = ConexaoAgendaFactory.getConexao()){
 			
-			String sql = "SELECT * FROM contatos";
-			PreparedStatement ps = conn.prepareStatement(sql);			
+			String sql = "SELECT * FROM contatos WHERE userid = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);	
+			ps.setInt(1, userid);
 			ResultSet rs = ps.executeQuery();
 			List<Contato> contatos = new ArrayList<Contato>();
 			
 			while(rs.next()) {
 				Contato c= new Contato();
-				
 				c.setId(rs.getInt(1));
 				c.setNome(rs.getString(2));
 				c.setEmail(rs.getString(3));
-				
+				c.setEndereco(rs.getString(4));
+				c.setTelefone(rs.getString(5));
 				contatos.add(c);
 			}
 			
@@ -50,6 +53,33 @@ public class ContatoDAO{
 		
 		} catch (SQLException e) {
 			
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<Contato> readForName(String nome, int userid){
+		try(Connection conn = ConexaoAgendaFactory.getConexao()){
+			String n = nome.toUpperCase();
+			String sql = "SELECT * FROM CONTATOS WHERE NAME LIKE '"+n+"%' and userid = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);	
+			ps.setInt(1, userid);
+			ResultSet rs = ps.executeQuery();
+			List<Contato> contatos = new ArrayList<Contato>();
+			
+			while(rs.next()) {
+				Contato c= new Contato();
+				c.setId(rs.getInt(1));
+				c.setNome(rs.getString(2));
+				c.setEmail(rs.getString(3));
+				c.setEndereco(rs.getString(4));
+				c.setTelefone(rs.getString(5));
+				contatos.add(c);
+			}
+			
+			return contatos;
+		
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -70,6 +100,8 @@ public class ContatoDAO{
 				contato.setId(rs.getInt(1));
 				contato.setNome(rs.getString(2));
 				contato.setEmail(rs.getString(3));
+				contato.setEndereco(rs.getString(4));
+				contato.setTelefone(rs.getString(5));
 			}
 			
 			return contato;
@@ -80,17 +112,18 @@ public class ContatoDAO{
 		return null;
 	}
 	
-	public void update(Contato contato){
+	public void update(Contato contato, int id){
 		try(Connection conn = ConexaoAgendaFactory.getConexao()){
 			
-			String sql = "UPDATE contatos SET name = ?, email = ? WHERE id = ?";
+			String sql = "UPDATE contatos SET name = ?, email = ?, endereco = ?, telefone = ? WHERE id = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, contato.getNome());
+			ps.setString(1, contato.getNome().toUpperCase());
 			ps.setString(2, contato.getEmail());
-			ps.setInt(3, contato.getId());
-			
+			ps.setString(3, contato.getEndereco());
+			ps.setString(4, contato.getTelefone());
+			ps.setInt(5, id);
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {

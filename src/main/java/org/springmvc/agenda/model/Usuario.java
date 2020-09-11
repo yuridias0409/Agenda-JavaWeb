@@ -1,17 +1,17 @@
 package org.springmvc.agenda.model;
 
 public class Usuario {
-	private String name;
+	private String nome;
 	private String senha;
 	private String email;
 	private int id;
 	
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 	public String getSenha() {

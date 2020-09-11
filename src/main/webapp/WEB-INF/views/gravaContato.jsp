@@ -13,17 +13,27 @@
 <c:if test="${not empty param.nome}">
 <center><h3>O contato ${param.nome} foi adicionado com sucesso!</h3><center>
 </c:if>
+<br>
 <div class="container">
 	<form method=post action=salvarContato>
+	  <center><h2>Novo Contato</h2></center>
 	  <div class="form-group">
 	  	<center><label>Nome</label></center>
-	    <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Nome" name="nome">
+	    <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" placeholder="Nome" name="nome" required>
 	  </div>
 	  <div class="form-group">
 	    <center><label>Email</label></center>
-	    <input type="email" class="form-control" id="senha" placeholder="Email" name="email">
+	    <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
 	  </div>
-	  <center><button type="submit" class="btn btn-primary" value="Adicionar">Salvar</button><center>
+	  <div class="form-group">
+	    <center><label>Endereco</label></center>
+	    <input type="text" class="form-control" id="endereco" placeholder="Endereco" name="endereco" required>
+	  </div>
+	  <div class="form-group">
+	    <center><label>Telefone</label></center>
+	    <input type="text" class="form-control" id="telefone" placeholder="Telefone" name="telefone" required>
+	  </div>
+	  <center><button type="submit" class="btn btn-outline-primary" value="Adicionar">Salvar</button><center>
 	</form>
 </div>
 <br>

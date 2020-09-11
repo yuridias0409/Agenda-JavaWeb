@@ -14,10 +14,10 @@ public class UsuarioDAO {
 	public void create(Usuario usuario) {
 		try(Connection conn = ConexaoAgendaFactory.getConexao()){
 			
-			String sql = "INSERT INTO users (name, email, password) VALUES (?, ?)";
+			String sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, usuario.getName());
+			ps.setString(1, usuario.getNome());
 			ps.setString(2, usuario.getEmail());
 			ps.setString(3, usuario.getSenha());
 			ps.executeUpdate();
@@ -39,7 +39,7 @@ public class UsuarioDAO {
 				Usuario u= new Usuario();
 				
 				u.setId(rs.getInt(1));
-				u.setName(rs.getString(2));
+				u.setNome(rs.getString(2));
 				u.setEmail(rs.getString(3));
 				u.setSenha(rs.getString(4));
 				
@@ -68,7 +68,7 @@ public class UsuarioDAO {
 			if(rs.next()){
 				usuario = new Usuario();
 				usuario.setId(rs.getInt(1));
-				usuario.setName(rs.getString(2));
+				usuario.setNome(rs.getString(2));
 				usuario.setEmail(rs.getString(3));
 				usuario.setSenha(rs.getString(4));
 			}
@@ -80,7 +80,7 @@ public class UsuarioDAO {
 		}
 		return null;
 	}
-	
+			
 	public void update(Usuario usuario){
 		try(Connection conn = ConexaoAgendaFactory.getConexao()){
 			
@@ -88,7 +88,7 @@ public class UsuarioDAO {
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, usuario.getName());
+			ps.setString(1, usuario.getNome());
 			ps.setString(2, usuario.getEmail());
 			ps.setInt(3, usuario.getId());
 			ps.setString(4, usuario.getSenha());
@@ -112,4 +112,66 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}	
 	}
+	
+	public boolean verificaCadastrado(String email){
+		try(Connection conn = ConexaoAgendaFactory.getConexao()){
+			String sql = "SELECT * FROM users WHERE email = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			
+			ResultSet rs = ps.executeQuery();
+						
+			if(rs.next()){
+				return true;
+			}	else {
+				return false;
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean verificaLogin(String email, String senha) {
+		try(Connection conn = ConexaoAgendaFactory.getConexao()){
+			String sql = "SELECT * FROM users WHERE email = ? and password = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			ps.setString(2, senha);
+			
+			ResultSet rs = ps.executeQuery();
+						
+			if(rs.next()){
+				return true;
+			}	else {
+				return false;
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public int retornaID(String email) {
+		try(Connection conn = ConexaoAgendaFactory.getConexao()){
+			String sql = "SELECT id FROM users WHERE email = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			
+			ResultSet rs = ps.executeQuery();
+			int id = 0;			
+			if(rs.next()){
+				id = rs.getInt("id");
+			}
+			return id;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
 }

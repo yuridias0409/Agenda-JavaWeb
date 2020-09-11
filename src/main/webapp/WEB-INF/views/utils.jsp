@@ -5,12 +5,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <style>
 	.container {
-		width: 100vw;
+		width: 20vw;
 	 	height: 50vh;
 	  	display: flex;
 	  	flex-direction: row;
 	  	justify-content: center;
-	  	align-items: center
+	  	align-items: center;
+	  	border-style: double;
+	  	border-width: 10px;
 	}
 	.box {
 		width: 150px;
@@ -19,5 +21,6 @@
 	}
 	body {
 		margin: 0px;
+		background-color: #ebeced;
 	}
 </style>

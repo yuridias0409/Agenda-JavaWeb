@@ -10,12 +10,24 @@
 </head>
 <body>
 <%@ include file="userNavBar.jsp" %>
+
+<form method=POST action=filtrarNome>
+	<div class="col-lg-6">
+		<div class="row">
+			<input class="form-control" style="width: 25%" id="filtroNome" placeholder="Filtrar Nome" name="name">
+			<button type="submit" class="btn btn-outline-primary" value="Adicionar">Filtrar</button>
+		</div>
+	</div>
+</form>
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nome</th>
       <th scope="col">Email</th>
+      <th scope="col">Endereco</th>
+      <th scope="col">Telefone</th>
       <th scope="col">Ação</th>
     </tr>
   </thead>
@@ -25,6 +37,8 @@
       <td scope="row">${contatos.id}</td>
       <td>${contatos.nome}</td>
 	  <td>${contatos.email}</td>
+	  <td>${contatos.endereco}</td>
+	  <td>${contatos.telefone}</td>
 	  <td><a class="btn btn-outline-primary" href=attContato?id=${contatos.id}>Atualizar</a><a class="btn btn-outline-danger" href=removerContato?id=${contatos.id}>Remover</a></td>
     </tr>
   </c:forEach>  

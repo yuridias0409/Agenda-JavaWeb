@@ -10,21 +10,26 @@
 <body>
 <%@ include file="loginNavbar.jsp" %>
 <br>
+
 <div class="container">
-	<form method=post action=logaUsuario>
-	  <center><h2>LOGIN</h2></center>
+	<form method=post action=registraUsuario>
+	  <center><h2>Registrar-se</h2></center>
 	  <br>
 	  <div class="form-group">
+	  	<center><label>Nome</label></center>
+	    <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" required>
+	  </div>
+	  <div class="form-group">
 	  	<center><label>Email</label></center>
-	    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" name="email" required>
+	    <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
 	  </div>
 	  <div class="form-group">
 	    <center><label>Senha</label></center>
 	    <input type="password" class="form-control" id="senha" placeholder="Senha" name="senha" required>
 	  </div>
-	  <center><small id="emailHelp" class="form-text text-muted"><a href=cadastro>Cadastre-se</a></small></center>
+	  <center><small id="emailHelp" class="form-text text-muted"><a href="login">Logar</a></small></center>
 	  <br>
-	  <center><button type="submit" class="btn btn-outline-primary" value="Logar">Logar</button></center>
+	  <center><button type="submit" class="btn btn-outline-primary" value="Logar">Registrar-se</button></center>
 	</form>
 </div>
 </body>
