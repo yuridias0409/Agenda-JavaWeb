@@ -31,7 +31,7 @@
 	  </div>
 	  <div class="form-group">
 	    <center><label>Telefone</label></center>
-	    <input type="text" class="form-control" id="telefone" placeholder="Telefone" name="telefone" required>
+	    <input type="number" class="form-control" id="telefone" placeholder="Telefone" name="telefone" required>
 	  </div>
 	  <center><button type="submit" class="btn btn-outline-primary" value="Adicionar">Salvar</button><center>
 	</form>
