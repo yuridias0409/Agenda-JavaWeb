@@ -5,8 +5,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <style>
 	.container {
-		width: 20vw;
-	 	height: 75vh;
+		width: 45%;
+	 	height: 90%;
 	  	display: flex;
 	  	flex-direction: row;
 	  	justify-content: center;
@@ -15,8 +15,8 @@
 	  	border-width: 10px;
 	}
 	.box {
-		width: 150px;
-		height: 150px;
+		width: 70%;
+		height: 80%;
 		background: #fff;
 	}
 	body {

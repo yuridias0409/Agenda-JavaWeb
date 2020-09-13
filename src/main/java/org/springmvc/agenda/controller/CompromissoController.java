@@ -3,23 +3,41 @@ package org.springmvc.agenda.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springmvc.agenda.DAO.CompromissoDAO;
-import org.springmvc.agenda.DAO.ContatoDAO;
-import org.springmvc.agenda.model.Compromisso;
+import org.springmvc.agenda.DAO.ContatoRepository;
+import org.springmvc.agenda.DAO.UsuarioRepository;
+import org.springmvc.agenda.DAO.CompromissoRepository;
+import org.springmvc.agenda.model.Compromissos;
+import org.springmvc.agenda.model.Contatos;
+import org.springmvc.agenda.model.Users;
 
 @Controller
 public class CompromissoController {
 	
+	private ContatoRepository contatodao;
+	private CompromissoRepository compromissoDao;
+	private UsuarioRepository userRep;
+	
+	@Autowired
+	public CompromissoController(ContatoRepository contatodao, CompromissoRepository compromissoDao, UsuarioRepository userRep){
+		this.compromissoDao = compromissoDao;
+		this.contatodao = contatodao;
+		this.userRep = userRep;
+	}
+	
+	@Transactional
 	@RequestMapping("novoCompromisso")
 	public String formCompromisso(HttpSession sessao, Model model) {
 		if(sessao.getAttribute("userid") != null) {
-			ContatoDAO contatodao = new ContatoDAO();
 			model.addAttribute("contatos", contatodao.readAll((int) sessao.getAttribute("userid")));
 			return "formCompromisso";
 		}	else {
@@ -27,23 +45,34 @@ public class CompromissoController {
 		}
 	}
 	
-	@RequestMapping("agendaCompromisso")
-	public String agendaCompromisso(Compromisso compromisso, HttpSession sessao, Model model) {
+	@Transactional
+	@RequestMapping("agendaCompromissos")
+	public String agendaCompromissos(Compromissos compromisso, HttpSession sessao, Model model, HttpServletRequest request) {
 		if(sessao.getAttribute("userid") != null) {
-			CompromissoDAO cdao = new CompromissoDAO();
-			cdao.create(compromisso, (int) sessao.getAttribute("userid"));
+			int id = Integer.parseInt(request.getParameter("contatoid"));
+			Contatos contato = contatodao.read(id);
+			compromisso.setContato(contato);
+			Users user = userRep.read((int) sessao.getAttribute("userid"));
+			compromisso.setUser(user);
+			compromissoDao.create(compromisso);
 			return "redirect:listarCompromisso";
 		}	else {
 			return "redirect:login";
 		}
 	}
 	
+	@Transactional
 	@RequestMapping("listarCompromisso")
-	public String listarCompromisso(Compromisso compromisso, HttpSession sessao, Model model) {
+	public String listarCompromissos(Compromissos compromisso, HttpSession sessao, Model model) {
 		if(sessao.getAttribute("userid") != null) {
-			CompromissoDAO cdao = new CompromissoDAO();
-			List<Compromisso> compromissoList = new ArrayList<Compromisso>();
-			compromissoList.addAll(cdao.readAll((int) sessao.getAttribute("userid")));
+			List<Compromissos> compromissoList = new ArrayList<Compromissos>();
+			List<String> contatosNomes = new ArrayList<String>();
+			compromissoList.addAll(compromissoDao.readAll((int) sessao.getAttribute("userid")));
+			for(Compromissos comp : compromissoList) {
+				System.out.println(comp.getContato().toString());
+				contatosNomes.add(comp.getContato().getName());
+			}
+			model.addAttribute("contatosNomes", contatosNomes);
 			model.addAttribute("compromissos", compromissoList);
 			return "compromissosList";
 		}	else {
@@ -51,35 +80,38 @@ public class CompromissoController {
 		}
 	}
 	
-	@RequestMapping("removerCompromisso")
-	public String removerContato(@RequestParam(value = "id", required = true) int id, HttpSession sessao, Model model) {
+	@Transactional
+	@RequestMapping("removerCompromissos")
+	public String removerContatos(@RequestParam(value = "id", required = true) int id, HttpSession sessao, Model model) {
 		if(sessao.getAttribute("userid") != null) {
-			CompromissoDAO cdao = new CompromissoDAO();
-			cdao.delete(id);
+			compromissoDao.delete(id);
 			return "redirect:listarCompromisso";
 		}	else {
 			return "redirect:login";
 		}
 	}
 	
-	@RequestMapping("attCompromisso")
-	public String attContato(@RequestParam(value = "id", required = true) int id, HttpSession sessao, Model model) {
+	@Transactional
+	@RequestMapping("attCompromissos")
+	public String attContatos(@RequestParam(value = "id", required = true) int id, HttpSession sessao, Model model) {
 		if(sessao.getAttribute("userid") != null) {
-			CompromissoDAO compromissoDAO = new CompromissoDAO();
-			ContatoDAO contatodao = new ContatoDAO();
 			model.addAttribute("contatos", contatodao.readAll((int) sessao.getAttribute("userid")));
-			model.addAttribute("compromissos", compromissoDAO.read(id));
+			model.addAttribute("compromissos", compromissoDao.read(id));
 			return "editaCompromisso";
 		}	else {
 			return "redirect:login";
 		}
 	}
 	
-	@RequestMapping("editaCompro")
-	public String editaCompro(@RequestParam(value = "cid", required = true) int id, HttpSession sessao, Compromisso compromisso) {
+	@Transactional
+	@RequestMapping("editaCompromisso")
+	public String editaCompro(@RequestParam(value = "cid", required = true) int id, HttpSession sessao, Compromissos compromisso, HttpServletRequest request) {
 		if(sessao.getAttribute("userid") != null) {
-			CompromissoDAO compromissoDAO = new CompromissoDAO();
-			compromissoDAO.update(compromisso, id);
+			Contatos contato = contatodao.read(Integer.parseInt(request.getParameter("contatoid")));
+			compromisso.setContato(contato);
+			Users user = userRep.read((int) sessao.getAttribute("userid"));
+			compromisso.setUser(user);
+			compromissoDao.update(compromisso, id);
 			return "redirect:listarCompromisso";
 		}	else {
 			return "redirect:login";

@@ -3,17 +3,27 @@ package org.springmvc.agenda.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springmvc.agenda.DAO.UsuarioDAO;
-import org.springmvc.agenda.model.Usuario;
+import org.springmvc.agenda.DAO.UsuarioRepository;
+import org.springmvc.agenda.model.Users;
 
 @Controller
 public class usuarioController {		
-	@RequestMapping("registraUsuario")
-	public String registraUsuario(Usuario usuario) {
-		UsuarioDAO dao = new UsuarioDAO();
+	
+	private UsuarioRepository dao;
+	
+	@Autowired
+	public usuarioController(UsuarioRepository dao) {
+		this.dao = dao;
+	}
+	
+	@Transactional
+	@RequestMapping("registraUsers")
+	public String registraUsers(Users usuario) {
 		if(!dao.verificaCadastrado(usuario.getEmail())) {
 			dao.create(usuario);
 			return "login";
@@ -22,14 +32,14 @@ public class usuarioController {
 		}
 	}
 	
-	@RequestMapping("logaUsuario")
-	public String logaUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession sessao) {
+	@Transactional
+	@RequestMapping("logaUsers")
+	public String logaUsers(HttpServletRequest request, HttpServletResponse response, HttpSession sessao) {
 		String senha = request.getParameter("senha");
-		String email = request.getParameter("email");	
-		UsuarioDAO dao = new UsuarioDAO();
+		String email = request.getParameter("email");
 		if(dao.verificaLogin(email, senha)) {
 			sessao.setAttribute("userid", dao.retornaID(email));
-			return "gravaContato";
+			return "redirect:listarCompromisso";
 		}	else {
 			return "login";
 		}

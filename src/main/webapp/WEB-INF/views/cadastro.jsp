@@ -12,12 +12,12 @@
 <br>
 
 <div class="container">
-	<form method=post action=registraUsuario>
+	<form method=post action=registraUsers>
 	  <center><h2>Registrar-se</h2></center>
 	  <br>
 	  <div class="form-group">
 	  	<center><label>Nome</label></center>
-	    <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" required>
+	    <input type="text" class="form-control" id="nome" placeholder="Nome" name="name" required>
 	  </div>
 	  <div class="form-group">
 	  	<center><label>Email</label></center>
@@ -25,7 +25,7 @@
 	  </div>
 	  <div class="form-group">
 	    <center><label>Senha</label></center>
-	    <input type="password" class="form-control" id="senha" placeholder="Senha" name="senha" required>
+	    <input type="password" class="form-control" id="senha" placeholder="Senha" name="password" required>
 	  </div>
 	  <center><small id="emailHelp" class="form-text text-muted"><a href="login">Logar</a></small></center>
 	  <br>

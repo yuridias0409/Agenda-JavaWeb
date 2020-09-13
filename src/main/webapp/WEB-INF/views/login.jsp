@@ -11,7 +11,7 @@
 <%@ include file="loginNavbar.jsp" %>
 <br>
 <div class="container">
-	<form method=post action=logaUsuario>
+	<form method=post action=logaUsers>
 	  <center><h2>LOGIN</h2></center>
 	  <br>
 	  <div class="form-group">

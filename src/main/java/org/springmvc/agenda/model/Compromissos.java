@@ -1,13 +1,25 @@
 package org.springmvc.agenda.model;
 
-public class Compromisso {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Compromissos{
+	
+	@Id
+	@GeneratedValue
 	private int id;
 	private String local;
 	private String data;
 	private String descricao;
-	private int contatoID;
-	private int userid;
-	private String contatoNome;
+	
+	@ManyToOne
+	private Users user;
+	
+	@ManyToOne
+	private Contatos contato;
 	
 	public int getId() {
 		return id;
@@ -41,28 +53,20 @@ public class Compromisso {
 		this.descricao = descricao;
 	}
 	
-	public int getContatoID() {
-		return contatoID;
-	}
-	
-	public void setContatoID(int contatoID) {
-		this.contatoID = contatoID;
+	public Users getUser() {
+		return user;
 	}
 
-	public int getUserid() {
-		return userid;
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-	
-	public String getContatoNome() {
-		return contatoNome;
+	public Contatos getContato() {
+		return contato;
 	}
 
-	public void setContatoNome(String contatoNome) {
-		this.contatoNome = contatoNome;
+	public void setContato(Contatos contato) {
+		this.contato = contato;
 	}
 	
 	

@@ -4,9 +4,12 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
 	version="2.2">
 	<persistence-unit name="webagendajpapu">
+		<class>org.springmvc.agenda.model.Compromissos</class>
+		<class>org.springmvc.agenda.model.Contatos</class>
+		<class>org.springmvc.agenda.model.Users</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:hsql://localhost/agendadb" />
-			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:hsql://localhost/agendadb"/>
+			<property name="javax.persistence.jdbc.user" value="SA" />
 			<property name="javax.persistence.jdbc.password" value="" />
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />

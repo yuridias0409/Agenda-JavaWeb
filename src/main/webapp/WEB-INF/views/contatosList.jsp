@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%@ include file="utils.jsp" %>
-<title>Lista de Contato</title>
+<title>Lista de Contatos</title>
 </head>
 <body>
 <%@ include file="userNavBar.jsp" %>
@@ -35,11 +35,11 @@
   <c:forEach var="contatos" items="${contatos}">
     <tr>
       <td scope="row">${contatos.id}</td>
-      <td>${contatos.nome}</td>
+      <td>${contatos.name}</td>
 	  <td>${contatos.email}</td>
 	  <td>${contatos.endereco}</td>
 	  <td>${contatos.telefone}</td>
-	  <td><a class="btn btn-outline-primary" href=attContato?id=${contatos.id}>Atualizar</a><a class="btn btn-outline-danger" href=removerContato?id=${contatos.id}>Remover</a></td>
+	  <td><a class="btn btn-outline-primary" href=attContatos?id=${contatos.id}>Atualizar</a><a class="btn btn-outline-danger" href=removerContatos?id=${contatos.id}>Remover</a></td>
     </tr>
   </c:forEach>  
   </tbody>

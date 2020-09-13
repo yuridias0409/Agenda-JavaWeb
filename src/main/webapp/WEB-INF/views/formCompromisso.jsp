@@ -12,7 +12,7 @@
 <%@ include file="userNavBar.jsp" %>	
 <br>
 <div class="container">
-	<form method=post action=agendaCompromisso>
+	<form method=post action=agendaCompromissos>
 	  <center><h2>Novo Compromisso</h2></center>
 	  <br>
 	  <div class="form-group">
@@ -24,10 +24,10 @@
 	    <input type="date" class="form-control" id="local" placeholder="Data" name="data" required>
 	  </div>
 	  <div class="form-group">
-		<center><label>Contato</label></center>
-		<select name=contatoID class="form-control">
+		<center><label>Contatos</label></center>
+		<select name=contatoid class="form-control">
 		  <c:forEach var="contatos" items="${contatos}">
-			<option value="${contatos.id}">${contatos.nome}</option>
+			<option value="${contatos.id}">${contatos.name}</option>
 		  </c:forEach> 
 		</select>
 	  </div>

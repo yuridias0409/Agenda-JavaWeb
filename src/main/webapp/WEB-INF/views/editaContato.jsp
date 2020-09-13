@@ -10,16 +10,16 @@
 </head>
 <body>
 <%@ include file="userNavBar.jsp" %>
-<c:if test="${not empty param.nome}">
-<center><h3>O contato ${param.nome} foi editado com sucesso!</h3><center>
+<c:if test="${not empty param.name}">
+<center><h3>O contato ${param.name} foi editado com sucesso!</h3><center>
 </c:if>
 <br>
 <div class="container">
-	<form method=POST action=editaContatos?cid=${contato.id}>
+	<form method=POST action=editaContato?cid=${contato.id}>
 	  <center><h2>Editar Contato</h2></center>
 	  <div class="form-group">
 	  	<center><label>Nome</label></center>
-	    <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" placeholder="Nome" name="nome" value=${contato.nome} required>
+	    <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" placeholder="Nome" name="name" value=${contato.name} required>
 	  </div>
 	  <div class="form-group">
 	    <center><label>Email</label></center>

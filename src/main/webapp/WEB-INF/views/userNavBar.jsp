@@ -11,7 +11,7 @@
           Contatos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href=novoContato>Novo Contato</a>
+          <a class="dropdown-item" href=novoContatos>Novo Contatos</a>
           <a class="dropdown-item" href=listarContatos>Listar Contatos</a>
         </div>
       </li>

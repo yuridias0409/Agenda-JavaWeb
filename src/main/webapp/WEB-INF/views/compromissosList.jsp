@@ -17,20 +17,20 @@
       <th scope="col">#</th>
       <th scope="col">Local</th>
       <th scope="col">Data</th>
-      <th scope="col">Contato</th>
+      <th scope="col">Contatos</th>
       <th scope="col">Descrição</th>
       <th scope="col">Ação</th>
     </tr>
   </thead>
   <tbody>
-  <c:forEach var="compromissos" items="${compromissos}">
+  <c:forEach var="compromissos" items="${compromissos}" varStatus="loop">
     <tr>
       <td scope="row">${compromissos.id}</td>
       <td>${compromissos.local}</td>
 	  <td>${compromissos.data}</td>
-	  <td>${compromissos.contatoNome}</td>
+	  <td>${contatosNomes.get(loop.index)}</td>
 	  <td>${compromissos.descricao}</td>
-	  <td><a class="btn btn-outline-primary" href=attCompromisso?id=${compromissos.id}>Atualizar</a><a class="btn btn-outline-danger" href=removerCompromisso?id=${compromissos.id}>Remover</a></td>
+	  <td><a class="btn btn-outline-primary" href=attCompromissos?id=${compromissos.id}>Atualizar</a><a class="btn btn-outline-danger" href=removerCompromissos?id=${compromissos.id}>Remover</a></td>
     </tr>
   </c:forEach>  
   </tbody>

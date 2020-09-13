@@ -1,19 +1,30 @@
 package org.springmvc.agenda.model;
 
-public class Contato {
-	private String nome;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Contatos {
+	private String name;
 	private String email;
 	private String endereco;
 	private String telefone;
-	private int userid;
+
+	@ManyToOne
+	private Users user;
+	
+	@Id
+	@GeneratedValue
 	private int id;
 	
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 	
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String getEmail() {
@@ -40,14 +51,16 @@ public class Contato {
 		this.telefone = telefone;
 	}
 	
-	public int getUserid() {
-		return userid;
-	}
 	
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
 	
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
 	public int getId() {
 		return id;
 	}
